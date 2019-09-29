@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "com.e16din.gosuslugi"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+}
+
+dependencies {
+    // AndroidX
+    implementation "androidx.multidex:multidex:2.0.1"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta04'
+
+    // Google 
+    implementation 'com.google.android.material:material:1.0.0'
+
+    // Kotlin
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$ver_kotlin"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$ver_coroutines"
+
+    // Retrofit 2
+    implementation "com.squareup.retrofit2:retrofit:$ver_retrofit" // Apache 2.0
+    implementation "com.squareup.retrofit2:converter-gson:$ver_retrofit"
+
+    // Okhttp 3
+    implementation "com.squareup.okhttp3:okhttp:$ver_okhttp" // Apache 2.0
+    implementation "com.squareup.okhttp3:logging-interceptor:$ver_okhttp" // Apache 2.0
+
+    // Local Libs
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}

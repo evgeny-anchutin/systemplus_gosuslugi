@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:context=".screens.SplashActivity">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/vToolbarContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:title="Оформление заявки"
+            app:titleTextColor="@android:color/white" />
+
+        <include layout="@layout/item_field_date" />
+
+        <include layout="@layout/item_field_number" />
+
+        <include layout="@layout/item_field_string" />
+
+        <include layout="@layout/item_field_values" />
+
+        <include layout="@layout/item_field_boolean" />
+
+        <Button
+            android:id="@+id/vCreateRequestButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/colorAccent"
+            android:maxWidth="200dp"
+            android:text="Подать заявку"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+</ScrollView>
