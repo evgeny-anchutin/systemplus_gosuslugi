@@ -1,7 +1,7 @@
 package com.e16din.gosuslugi.server.data.services
 
 
-data class ServiceCategory(
+data class ServiceCategoryData(
     val id: Long,
     val name: String
 )

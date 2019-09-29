@@ -7,7 +7,7 @@
     tools:context=".screens.SplashActivity">
 
     <TextView
-        android:id="@+id/vFieldNameLabel"
+        android:id="@+id/vFieldUnknownNamLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="12dp"

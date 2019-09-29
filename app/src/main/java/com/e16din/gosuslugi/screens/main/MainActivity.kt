@@ -1,7 +1,6 @@
 package com.e16din.gosuslugi.screens.main
 
 import android.app.ProgressDialog
-import android.app.Service
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -19,12 +18,14 @@ import com.e16din.gosuslugi.screens.main.createrequest.CreateRequestScreenState
 import com.e16din.gosuslugi.server.ApiResult
 import com.e16din.gosuslugi.server.Requests
 import com.e16din.gosuslugi.server.awaitResult
+import com.e16din.gosuslugi.server.data.services.ServiceData
 import kotlinx.android.synthetic.main.screen_main.*
 import kotlinx.coroutines.launch
 
 
 data class MainScreenState(
-    var services: MutableList<ServiceItem> = ArrayList(),
+    var serviceItemList: MutableList<ServiceItem> = ArrayList(),
+    var serviceDataList: MutableList<ServiceData> = ArrayList(),
     var searchQuery: String = ""
 )
 
@@ -47,6 +48,8 @@ class MainActivity : AppCompatActivity(), LocalCoroutineScope {
     val activity = this
     val screenState get() = app.screenStatesMap[MainActivity::class] as MainScreenState
 
+    // Temp:
+
     var progressDialog: ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +68,7 @@ class MainActivity : AppCompatActivity(), LocalCoroutineScope {
         screenState.searchQuery = vSearchField.text.toString()
 
         userAgent.showServicesLoadingProgress()
-        serverAgent.loadServices(query = screenState.searchQuery)
+        serverAgent.loadServices()
         userAgent.hideServicesLoadingProgress()
         userAgent.showServicesList()
 
@@ -75,7 +78,7 @@ class MainActivity : AppCompatActivity(), LocalCoroutineScope {
         }
     }
 
-    fun UserAgent.showServicesLoadingProgress() = launch {
+    fun UserAgent.showServicesLoadingProgress() {
         progressDialog = ProgressDialog(activity)
         progressDialog?.setMessage("Загрузка услуг..")
         progressDialog?.show()
@@ -96,15 +99,19 @@ class MainActivity : AppCompatActivity(), LocalCoroutineScope {
         vServicesList.adapter?.notifyDataSetChanged()
     }
 
-    fun UserAgent.showCreateRequestScreen(request: ServiceItem) {
-        app.screenStatesMap[CreateRequestActivity::class] = CreateRequestScreenState(request)
+    fun UserAgent.showCreateRequestScreen() {
         val intent = Intent(activity, CreateRequestActivity::class.java)
         startActivity(intent)
     }
 
     fun SystemAgent.initViewActions() {
         ItemClickSupport.addTo(vServicesList).setOnItemClickListener { vList, position, v ->
-            userAgent.showCreateRequestScreen(screenState.services[position])
+            val serviceItem = screenState.serviceItemList[position]
+            val serviceData = screenState.serviceDataList[position]
+            app.screenStatesMap[CreateRequestActivity::class] =
+                CreateRequestScreenState(serviceItem, serviceData)
+
+            userAgent.showCreateRequestScreen()
         }
 
         vSearchButton.setOnClickListener {
@@ -151,31 +158,35 @@ class MainActivity : AppCompatActivity(), LocalCoroutineScope {
         vClearButton.visibility = View.GONE
     }
 
-    suspend fun ServerAgent.loadServices(query: String) {
+    suspend fun ServerAgent.loadServices() {
         val result = Requests.commonApi.loadServices(
             getAuthHeader(),
-            query
+            screenState.searchQuery
         ).awaitResult()
 
         when (result) {
             is ApiResult.Success -> {
                 val data = result.data!!
+                val departments = data.DepartmentList!!
                 val services = data.ServiceList!!
-                    .map { service ->
-                        val departments = data.DepartmentList!!
-                        val department = departments.first { department ->
-                            department.id == service.departmentId
-                        }
-                        ServiceItem(service.name, department.name)
-                    }
-                    .toMutableList()
 
-                screenState.services = services
+                val serviceItemList = services.map { service ->
+                    val department = departments.first { department ->
+                        department.id == service.departmentId
+                    }
+                    ServiceItem(service.name, department.name)
+
+                }.toMutableList()
+
+                screenState.serviceItemList = serviceItemList
+                screenState.serviceDataList = services
             }
+
             is ApiResult.Error -> {
                 Log.e("debug", "loadServices.error")
                 //todo: handle errors
             }
+
             is ApiResult.Fail -> {
                 Log.e("debug", "loadServices.fail")
                 //todo: handle fails

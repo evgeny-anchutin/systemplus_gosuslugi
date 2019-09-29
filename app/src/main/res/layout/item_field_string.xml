@@ -7,7 +7,7 @@
     tools:context=".screens.SplashActivity">
 
     <TextView
-        android:id="@+id/vFieldNameLabel"
+        android:id="@+id/vFieldStringNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="12dp"
@@ -19,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:inputType="text"
-        android:text="Введите ФИО"
         android:textColor="#000000" />
 
     <View

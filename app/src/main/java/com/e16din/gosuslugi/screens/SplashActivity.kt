@@ -42,7 +42,7 @@ class SplashActivity : AppCompatActivity(), LocalCoroutineScope {
 
     private fun runActions() = launch {
         userAgent.showSplashLayout()
-        systemAgent.delayMs(5 * 1000)
+        systemAgent.delayMs(3 * 1000)
         //todo: сделать индикатор загрузки, можно кружками по одному
         userAgent.showMainScreen()
     }

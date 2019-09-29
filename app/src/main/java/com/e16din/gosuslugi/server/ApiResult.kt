@@ -1,10 +1,10 @@
 package com.e16din.gosuslugi.server
 
 import android.util.Log
-import com.e16din.gosuslugi.server.data.services.Services
+import com.e16din.gosuslugi.server.data.services.ServicesData
 import retrofit2.Response
 
-typealias ApiResponse = Response<Services>
+typealias ApiResponse = Response<ServicesData>
 
 sealed class ApiResult<out R> {
 

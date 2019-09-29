@@ -1,44 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".screens.SplashActivity">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/vToolbarContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:context=".screens.SplashActivity">
+        android:background="@color/colorPrimary"
+        app:title="Оформление заявки"
+        app:titleTextColor="@android:color/white" />
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/vToolbarContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            app:title="Оформление заявки"
-            app:titleTextColor="@android:color/white" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Ведомство:" />
 
-        <include layout="@layout/item_field_date" />
+    <TextView
+        android:id="@+id/vDepartmentNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:text="Паспортный стол"
+        android:textColor="#000000"
+        android:textSize="24sp" />
 
-        <include layout="@layout/item_field_number" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Услуга:" />
 
-        <include layout="@layout/item_field_string" />
+    <TextView
+        android:id="@+id/vServiceNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginRight="16dp"
+        android:text="Получение загранпаспорта"
+        android:textColor="#000000"
+        android:textSize="24sp" />
 
-        <include layout="@layout/item_field_values" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/colorPrimary" />
 
-        <include layout="@layout/item_field_boolean" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vServiceFieldsList"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/vCreateRequestButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:backgroundTint="@color/colorAccent"
-            android:maxWidth="200dp"
-            android:text="Подать заявку"
-            android:textColor="@android:color/white" />
+    <Button
+        android:id="@+id/vCreateRequestButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:backgroundTint="@color/colorAccent"
+        android:maxWidth="200dp"
+        android:text="Подать заявку"
+        android:textColor="@android:color/white" />
 
-    </LinearLayout>
+</LinearLayout>
 
-</ScrollView>

@@ -1,7 +1,7 @@
 package com.e16din.gosuslugi.server.api
 
-import com.e16din.gosuslugi.server.data.services.Services
-import com.e16din.gosuslugi.server.data.services.fields.ServiceFields
+import com.e16din.gosuslugi.server.data.services.ServicesData
+import com.e16din.gosuslugi.server.data.services.fields.ServiceFieldsData
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -18,7 +18,7 @@ interface CommonApi {
     suspend fun loadServices(
         @Header("Authorization") authHeader: String,
         @Query("searchtext") query: String
-    ): Response<Services>
+    ): Response<ServicesData>
 
     /**
      *  Получить список полей для заявки.
@@ -27,7 +27,7 @@ interface CommonApi {
     suspend fun loadServiceFields(
         @Header("Authorization") authHeader: String,
         @Query("service_id") serviceId: Long
-    ): Response<ServiceFields>
+    ): Response<ServiceFieldsData>
 
     /**
      *  Отправить заявку.

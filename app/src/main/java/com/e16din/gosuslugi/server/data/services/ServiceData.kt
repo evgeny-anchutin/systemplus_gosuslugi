@@ -1,7 +1,7 @@
 package com.e16din.gosuslugi.server.data.services
 
 
-data class Service(
+data class ServiceData(
     val id: Long,
     val name: String,
     val departmentId: Long,

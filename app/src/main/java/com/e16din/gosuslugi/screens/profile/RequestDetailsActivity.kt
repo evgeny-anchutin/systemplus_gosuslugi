@@ -18,8 +18,6 @@ class RequestDetailsActivity : AppCompatActivity(), LocalCoroutineScope {
     val userAgent = UserAgent()
     val systemAgent = SystemAgent()
     val serverAgent = ServerAgent()
-    val screenAgent = ScreenAgent()
-    val appAgent = AppAgent()
 
     // Fruits:
 

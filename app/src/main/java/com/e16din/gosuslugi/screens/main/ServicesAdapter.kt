@@ -24,7 +24,7 @@ class ServicesAdapter(var screenState: MainScreenState) :
     // Fruits:
 
 
-    override fun getItemCount() = screenState.services.size
+    override fun getItemCount() = screenState.serviceItemList.size
 
     override fun onCreateViewHolder(vParent: ViewGroup, viewType: Int): ServiceVh {
         val view = LayoutInflater.from(vParent.context)
@@ -34,7 +34,7 @@ class ServicesAdapter(var screenState: MainScreenState) :
     }
 
     override fun onBindViewHolder(holder: ServiceVh, position: Int) {
-        val item = screenState.services[position]
+        val item = screenState.serviceItemList[position]
 
         userAgent.showRequestName(holder.itemView, item.name)
         userAgent.showDepartmentName(holder.itemView, item.departmentName)

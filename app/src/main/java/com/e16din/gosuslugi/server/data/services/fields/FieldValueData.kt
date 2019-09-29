@@ -1,7 +1,7 @@
 package com.e16din.gosuslugi.server.data.services.fields
 
 
-data class FieldValue(
+data class FieldValueData(
     val fieldId: Long,
     val fieldName: String, // "Произвольное поле"
     val valueId: Long,
